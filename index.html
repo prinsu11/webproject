@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VT Food Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Improved CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff; /* White background */
+            color: #333;
+        }
+
+        header {
+            background-color: #ff6600;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        a#reservations-button { /* Updated to use an anchor tag for the Reservations button */
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #ff6600;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none; /* Added text-decoration to remove underlines */
+        }
+
+        a#reservations-button:hover {
+            background-color: #999;;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            background-color: #333;
+            text-align: center;
+        }
+
+        nav li {
+            margin: 0;
+        }
+
+        nav a {
+            display: block;
+            text-decoration: none;
+            color: ghostwhite;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        section h2 {
+            font-size: 28px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        section p {
+            font-size: 18px;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        /* Additional CSS for the dynamic menu content */
+        #menu-content {
+            display: none;
+        }
+
+        #dynamic-menu h3 {
+            font-size: 24px;
+            color: #333;
+            margin: 0;
+        }
+
+        #dynamic-menu ul {
+            margin-left: 0;
+            padding-left: 20px;
+        }
+
+        #dynamic-menu li {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        #menu-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>VT Food Store</h1>
+    </header>
+    
+    <a href="reservation.html" id="reservations-button">Reservations</a>
+    
+    <nav>
+        <ul>
+            <li><a href="home.html">Home</a></li> <!-- Link to the home page -->
+            <li><a href="#" id="menu-link">Menu</a></li>
+            <li><a href="contact.html">Contact</a></li> <!-- Link to the contact page -->
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Inside the <main> section, add a reservation form -->
+
+
+        <section id="home">
+            <h2>Welcome to VT Food Store</h2>
+            <p>Discover delicious dishes from our menu.</p>
+        </section>
+
+        <section id="menu-content"> <!-- Content initially hidden -->
+            <h2>Menu</h2>
+            <ul id="dynamic-menu">
+                <!-- Dynamic menu items will be added here -->
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 VT Food Store</p>
+    </footer>
+
+    <script>
+        // JavaScript to toggle the visibility of the menu content
+        const menuLink = document.getElementById("menu-link");
+        const menuContent = document.getElementById("menu-content");
+        const dynamicMenu = document.getElementById("dynamic-menu");
+
+        menuLink.addEventListener("click", function (event) {
+            event.preventDefault(); // Prevents the default link behavior
+
+            if (menuContent.style.display === "none" || menuContent.style.display === "") {
+                menuContent.style.display = "block";
+                generateDynamicMenu();
+            } else {
+                menuContent.style.display = "none";
+            }
+        });
+
+        // Function to generate dynamic menu items
+        function generateDynamicMenu() {
+            const items = [
+                { category: "Appetizers", items: ["Tea - Rs 50", "Coffee - Rs 12o", "Cold Drinks - Rs 90"] },
+                { category: "Main Courses", items: ["Pasta - Rs 140", "Grilled chicken - 350", "Roast chicken - Rs 300"] },
+                { category: "Desserts", items: ["strawberry cake - Rs 170", "Chocolate Cake - Rs 290", "Apple Pie - RS 400"] }
+            ];
+
+            dynamicMenu.innerHTML = ""; // Clear existing items
+
+            items.forEach((item) => {
+                const listItem = document.createElement("li");
+                const categoryHeader = document.createElement("h3");
+                categoryHeader.textContent = item.category;
+                listItem.appendChild(categoryHeader);
+
+                const itemList = document.createElement("ul");
+                item.items.forEach((menuItem) => {
+                    const menuItemElement = document.createElement("li");
+                    menuItemElement.textContent = menuItem;
+                    itemList.appendChild(menuItemElement);
+                });
+
+                listItem.appendChild(itemList);
+                dynamicMenu.appendChild(listItem);
+            });
+        }
+    </script>
+</body>
+</html>
